@@ -121,11 +121,15 @@ export const posts: Post[] = [
 
 export const allTags = Array.from(new Set(posts.flatMap((p) => p.tags))).sort();
 
-export const archive = [
-  { year: "2024", count: 2 },
-  { year: "2023", count: 1 },
-  { year: "2017", count: 1 },
-  { year: "2014", count: 1 },
-];
+// Derivado automaticamente dos posts — não precisa ser mantido manualmente
+export const archive = Object.entries(
+  posts.reduce<Record<string, number>>((acc, p) => {
+    const year = p.date.slice(0, 4);
+    acc[year] = (acc[year] ?? 0) + 1;
+    return acc;
+  }, {}),
+)
+  .map(([year, count]) => ({ year, count }))
+  .sort((a, b) => Number(b.year) - Number(a.year));
 
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug);

@@ -19,24 +19,34 @@ export function SiteNav() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 bg-cream/80 px-6 py-4 backdrop-blur-md transition-shadow ${
-        scrolled
-          ? "border-b border-border shadow-[0_8px_30px_-24px_oklch(0.29_0.041_108.5)]"
-          : "border-b border-transparent"
+      style={{ padding: "1rem 1.5rem" }}
+      className={`sticky top-0 z-50 bg-cream/80 backdrop-blur-md transition-shadow ${
+        scrolled ? "border-b border-border shadow-sm" : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
-        <Link to="/" className="flex min-w-0 flex-col">
-          <span className="truncate font-serif text-2xl font-bold italic tracking-tight text-olive-deep">
+      <div
+        style={{
+          maxWidth: "80rem",
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Link to="/" style={{ display: "flex", flexDirection: "column" }}>
+          <span className="font-serif text-2xl font-bold italic tracking-tight text-olive-deep">
             Sítio Santo Elias
           </span>
-          <span className="truncate text-[10px] uppercase tracking-[0.2em] text-olive-deep/60">
+          <span className="text-[10px] uppercase tracking-[0.2em] text-olive-deep/60">
             Sociedade Coração de Maria — SCM
           </span>
         </Link>
 
-        <div className="flex items-center gap-6">
-          <div className="hidden gap-8 text-sm font-medium uppercase tracking-widest md:flex">
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <div
+            className="hidden md:flex text-sm font-medium uppercase tracking-widest"
+            style={{ gap: "2rem" }}
+          >
             {links.map((l) => (
               <Link
                 key={l.to}
@@ -49,12 +59,14 @@ export function SiteNav() {
               </Link>
             ))}
           </div>
+
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-label="Abrir menu"
             aria-expanded={open}
-            className="flex size-10 shrink-0 items-center justify-center rounded-full border border-border transition-all hover:bg-olive-deep hover:text-cream md:hidden"
+            style={{ width: "2.5rem", height: "2.5rem" }}
+            className="md:hidden shrink-0 flex items-center justify-center rounded-full border border-border transition-all hover:bg-olive-deep hover:text-cream"
           >
             <span className="text-lg leading-none">{open ? "×" : "+"}</span>
           </button>
@@ -62,7 +74,10 @@ export function SiteNav() {
       </div>
 
       {open && (
-        <div className="mx-auto mt-4 flex max-w-7xl flex-col gap-3 border-t border-border pt-4 text-sm uppercase tracking-widest md:hidden">
+        <div
+          className="md:hidden flex flex-col border-t border-border text-sm uppercase tracking-widest"
+          style={{ maxWidth: "80rem", margin: "1rem auto 0", paddingTop: "1rem", gap: "0.75rem" }}
+        >
           {links.map((l) => (
             <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="text-olive-deep">
               {l.label}

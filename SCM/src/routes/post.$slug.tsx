@@ -32,14 +32,21 @@ export const Route = createFileRoute("/post/$slug")({
 
 function PostPage() {
   const { slug } = Route.useParams();
-  const post = posts.find((p) => p.slug === slug)!;
+  const post = getPost(slug);
+
+  // O loader já lança notFound() se o post não existe
+  if (!post) return null;
+
   const related = posts.filter((p) => p.slug !== post.slug).slice(0, 2);
 
-
   return (
-    <main className="mx-auto max-w-7xl px-6 py-12">
+    <main style={{ maxWidth: "80rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
+      {/* Hero */}
       <Reveal>
-        <div className="relative mb-16 overflow-hidden rounded-2xl bg-olive-deep">
+        <div
+          className="relative overflow-hidden rounded-2xl bg-olive-deep"
+          style={{ marginBottom: "4rem" }}
+        >
           <img
             src={post.image}
             alt={post.imageAlt}
@@ -47,39 +54,72 @@ function PostPage() {
             height={1080}
             className="aspect-[21/9] w-full object-cover opacity-70"
           />
-          <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-olive-deep/90 to-transparent p-8 md:p-16">
-            <span className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-olive">
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-olive-deep/90 to-transparent"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              padding: "2rem",
+            }}
+          >
+            <span
+              className="text-xs font-medium uppercase tracking-[0.3em] text-olive"
+              style={{ marginBottom: "1rem" }}
+            >
               {post.category}
             </span>
-            <h1 className="max-w-3xl font-serif text-3xl leading-tight text-cream md:text-5xl">
+            <h1
+              className="font-serif text-3xl leading-tight text-cream md:text-5xl"
+              style={{ maxWidth: "48rem" }}
+            >
               {post.title}
             </h1>
-            <p className="mt-4 font-serif text-sm italic text-cream/60">
+            <p
+              className="font-serif text-sm italic text-cream/60"
+              style={{ marginTop: "1rem" }}
+            >
               {post.dateLabel} • Meruoca, Ceará
             </p>
           </div>
         </div>
       </Reveal>
 
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
-        <div className="md:col-span-8">
+      {/* Conteúdo + sidebar */}
+      <div
+        style={{ display: "flex", gap: "3rem", alignItems: "flex-start" }}
+        className="flex-col md:flex-row"
+      >
+        <div style={{ flex: "2" }}>
+          {/* Corpo do post */}
           <Reveal>
-            <div className="space-y-6 text-base leading-relaxed">
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }} className="text-base leading-relaxed">
               {post.body.map((p) => (
                 <p key={p.slice(0, 40)}>{p}</p>
               ))}
             </div>
           </Reveal>
 
+          {/* Links de filmes */}
           {post.links && (
             <Reveal delay={100}>
-              <div className="mt-12 rounded-2xl border border-border bg-card p-8">
-                <h2 className="mb-6 text-[11px] font-bold uppercase tracking-[0.3em] text-olive-deep">
+              <div
+                className="rounded-2xl border border-border bg-card"
+                style={{ marginTop: "3rem", padding: "2rem" }}
+              >
+                <h2
+                  className="text-[11px] font-bold uppercase tracking-[0.3em] text-olive-deep"
+                  style={{ marginBottom: "1.5rem" }}
+                >
                   Filmes da turma
                 </h2>
-                <ul className="space-y-4">
+                <ul style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                   {post.links.map((l) => (
-                    <li key={l.href} className="border-b border-border pb-4 last:border-0 last:pb-0">
+                    <li
+                      key={l.href}
+                      className="border-b border-border last:border-0"
+                      style={{ paddingBottom: "1rem" }}
+                    >
                       <a
                         href={l.href}
                         target="_blank"
@@ -100,30 +140,42 @@ function PostPage() {
             </Reveal>
           )}
 
-          <div className="mt-12 flex flex-wrap gap-2">
+          {/* Tags */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "3rem" }}>
             {post.tags.map((tag) => (
               <Link
                 key={tag}
                 to="/marcador/$tag"
                 params={{ tag }}
-                className="rounded-full border border-border bg-card px-3 py-1 text-[10px] font-bold uppercase tracking-tight text-olive-deep transition-all hover:-translate-y-0.5 hover:bg-olive/25"
+                className="rounded-full border border-border bg-card text-[10px] font-bold uppercase tracking-tight text-olive-deep transition-all hover:-translate-y-0.5 hover:bg-olive/25"
+                style={{ padding: "0.25rem 0.75rem" }}
               >
                 {tag}
               </Link>
             ))}
           </div>
 
-          <div className="mt-16 border-t border-border pt-8">
-            <h2 className="mb-8 text-[11px] font-bold uppercase tracking-[0.4em] text-olive-deep">
+          {/* Continue lendo */}
+          <div
+            className="border-t border-border"
+            style={{ marginTop: "4rem", paddingTop: "2rem" }}
+          >
+            <h2
+              className="text-[11px] font-bold uppercase tracking-[0.4em] text-olive-deep"
+              style={{ marginBottom: "2rem" }}
+            >
               Continue lendo
             </h2>
-            <div className="grid gap-8 sm:grid-cols-2">
+            <div
+              style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}
+            >
               {related.map((r) => (
                 <Link
                   key={r.slug}
                   to="/post/$slug"
                   params={{ slug: r.slug }}
                   className="group block"
+                  style={{ flex: "1", minWidth: "200px" }}
                 >
                   <div className="overflow-hidden rounded-xl">
                     <img
@@ -135,7 +187,10 @@ function PostPage() {
                       className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
-                  <h3 className="mt-4 font-serif text-lg leading-snug text-olive-deep transition-colors group-hover:text-olive">
+                  <h3
+                    className="font-serif text-lg leading-snug text-olive-deep transition-colors group-hover:text-olive"
+                    style={{ marginTop: "1rem" }}
+                  >
                     {r.title}
                   </h3>
                 </Link>
@@ -144,7 +199,7 @@ function PostPage() {
           </div>
         </div>
 
-        <div className="md:col-span-4">
+        <div style={{ flex: "1" }}>
           <BlogSidebar />
         </div>
       </div>

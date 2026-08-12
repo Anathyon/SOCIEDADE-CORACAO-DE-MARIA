@@ -49,15 +49,18 @@ const projetos = [
 
 function SobrePage() {
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16">
+    <main style={{ maxWidth: "56rem", margin: "0 auto", padding: "4rem 1.5rem" }}>
       <Reveal>
         <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-olive">
           Sobre nós
         </span>
-        <h1 className="mt-3 font-serif text-4xl leading-tight text-olive-deep md:text-5xl">
+        <h1
+          className="font-serif text-4xl leading-tight text-olive-deep md:text-5xl"
+          style={{ marginTop: "0.75rem" }}
+        >
           Sociedade Coração de Maria — SCM
         </h1>
-        <p className="mt-6 text-lg leading-relaxed">
+        <p className="text-lg leading-relaxed" style={{ marginTop: "1.5rem" }}>
           Associação comunitária sediada no Sítio Santo Elias, em Meruoca, Ceará. Desenvolve
           projetos voltados à arte, à cultura e à agricultura familiar, com apoio do Governo do
           Estado do Ceará e de parceiros da região.
@@ -71,16 +74,19 @@ function SobrePage() {
           loading="lazy"
           width={800}
           height={600}
-          className="mt-12 aspect-[16/9] w-full rounded-2xl object-cover"
+          className="aspect-[16/9] w-full rounded-2xl object-cover"
+          style={{ marginTop: "3rem" }}
         />
       </Reveal>
 
-      <div className="mt-16 space-y-10">
+      <div style={{ marginTop: "4rem", display: "flex", flexDirection: "column", gap: "2.5rem" }}>
         {projetos.map((p, i) => (
           <Reveal key={p.nome} delay={i * 90}>
-            <div className="border-b border-border pb-8">
+            <div className="border-b border-border" style={{ paddingBottom: "2rem" }}>
               <h2 className="font-serif text-2xl text-olive-deep">{p.nome}</h2>
-              <p className="mt-3 text-sm leading-relaxed">{p.texto}</p>
+              <p className="text-sm leading-relaxed" style={{ marginTop: "0.75rem" }}>
+                {p.texto}
+              </p>
             </div>
           </Reveal>
         ))}
@@ -89,7 +95,8 @@ function SobrePage() {
       <Reveal delay={100}>
         <Link
           to="/"
-          className="mt-12 inline-block border-b-2 border-olive text-xs font-bold uppercase tracking-widest text-olive-deep"
+          className="inline-block border-b-2 border-olive text-xs font-bold uppercase tracking-widest text-olive-deep"
+          style={{ marginTop: "3rem" }}
         >
           Ver as publicações
         </Link>

@@ -2,12 +2,27 @@ import { Link } from "@tanstack/react-router";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 bg-olive-deep px-6 py-16 text-cream/60">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 md:flex-row">
-        <div className="flex flex-col items-center md:items-start">
+    <footer
+      className="bg-olive-deep text-cream/60"
+      style={{ marginTop: "6rem", padding: "4rem 1.5rem" }}
+    >
+      <div
+        style={{
+          maxWidth: "80rem",
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "2rem",
+        }}
+        className="md:flex-row"
+      >
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }} className="md:items-start">
           <Link
             to="/"
-            className="mb-2 font-serif text-2xl font-bold italic tracking-tight text-cream"
+            className="font-serif text-2xl font-bold italic tracking-tight text-cream"
+            style={{ marginBottom: "0.5rem" }}
           >
             Sítio Santo Elias
           </Link>
@@ -15,7 +30,8 @@ export function SiteFooter() {
             Narrando o território desde 2014
           </p>
         </div>
-        <div className="flex gap-8 text-sm">
+
+        <div style={{ display: "flex", gap: "2rem" }} className="text-sm">
           <a
             href="https://asantoelias.blogspot.com/"
             target="_blank"
@@ -33,6 +49,7 @@ export function SiteFooter() {
             RSS
           </a>
         </div>
+
         <p className="text-center text-[10px] uppercase tracking-widest md:text-right">
           © {new Date().getFullYear()} Sociedade Coração de Maria.
           <br />

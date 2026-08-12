@@ -32,7 +32,6 @@ function Index() {
   const featured = posts[0]!;
   const rest = posts.slice(1);
 
-
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return rest;
@@ -45,9 +44,10 @@ function Index() {
   }, [query, rest]);
 
   return (
-    <main className="mx-auto max-w-7xl px-6 py-12">
-      <section className="reveal-in mb-24">
-        <div className="group relative overflow-hidden rounded-2xl bg-olive-deep">
+    <main style={{ maxWidth: "80rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
+      {/* Post em destaque */}
+      <section style={{ marginBottom: "6rem" }}>
+        <div className="reveal-in group relative overflow-hidden rounded-2xl bg-olive-deep">
           <img
             src={featured.image}
             alt={featured.imageAlt}
@@ -55,18 +55,33 @@ function Index() {
             height={1080}
             className="aspect-[16/10] w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-105 md:aspect-[21/9]"
           />
-          <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-olive-deep/90 to-transparent p-8 md:p-16">
-            <span className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-olive">
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-olive-deep/90 to-transparent"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              padding: "2rem",
+            }}
+          >
+            <span
+              className="text-xs font-medium uppercase tracking-[0.3em] text-olive"
+              style={{ marginBottom: "1rem" }}
+            >
               Destaque {featured.category}
             </span>
-            <h1 className="mb-6 max-w-3xl font-serif text-3xl leading-tight text-cream md:text-6xl">
+            <h1
+              className="font-serif text-3xl leading-tight text-cream md:text-6xl"
+              style={{ maxWidth: "48rem", marginBottom: "1.5rem" }}
+            >
               {featured.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-6">
+            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "1.5rem" }}>
               <Link
                 to="/post/$slug"
                 params={{ slug: featured.slug }}
-                className="rounded-full bg-olive px-8 py-3 text-xs font-bold uppercase tracking-widest text-olive-deep transition-colors hover:bg-cream"
+                className="rounded-full bg-olive text-xs font-bold uppercase tracking-widest text-olive-deep transition-colors hover:bg-cream"
+                style={{ padding: "0.75rem 2rem" }}
               >
                 Ler publicação
               </Link>
@@ -78,26 +93,40 @@ function Index() {
         </div>
       </section>
 
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
-        <div className="space-y-16 md:col-span-8">
-          <div className="flex flex-col gap-4 border-b border-border pb-4 sm:flex-row sm:items-center sm:justify-between">
+      {/* Lista de posts + sidebar */}
+      <div
+        style={{ display: "flex", gap: "3rem", alignItems: "flex-start" }}
+        className="flex-col md:flex-row"
+      >
+        <div style={{ flex: "2", display: "flex", flexDirection: "column", gap: "4rem" }}>
+          {/* Cabeçalho da lista */}
+          <div
+            className="border-b border-border"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+              paddingBottom: "1rem",
+            }}
+          >
             <h2 className="text-[11px] font-bold uppercase tracking-[0.4em] text-olive-deep">
               Últimas publicações
             </h2>
-            <label className="min-w-0 sm:w-64">
+            <label style={{ minWidth: 0, width: "16rem" }}>
               <span className="sr-only">Pesquisar no blog</span>
               <input
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Pesquisar no blog..."
-                className="w-full border-b border-border bg-transparent pb-1 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-olive-deep"
+                className="w-full border-b border-border bg-transparent text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-olive-deep"
+                style={{ paddingBottom: "0.25rem" }}
               />
             </label>
           </div>
 
           {filtered.length === 0 ? (
-            <p className="text-sm">Nenhuma publicação encontrada para “{query}”.</p>
+            <p className="text-sm">Nenhuma publicação encontrada para "{query}".</p>
           ) : (
             filtered.map((post, i) => (
               <Reveal key={post.slug} delay={i * 90}>
@@ -107,7 +136,7 @@ function Index() {
           )}
         </div>
 
-        <div className="md:col-span-4">
+        <div style={{ flex: "1" }}>
           <BlogSidebar />
         </div>
       </div>

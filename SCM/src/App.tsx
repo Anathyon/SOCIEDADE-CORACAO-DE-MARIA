@@ -1,24 +1,4 @@
-function App() {
-
-  return (
-    <>
-      <header>
-        <nav>
-          <ul>
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">Sobre</a>
-            </li>
-            <li>
-              <a href="#">Contato</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    </>
-  )
-}
-
-export default App
+// Este arquivo não é mais utilizado.
+// O roteamento é gerenciado pelo RouterProvider em main.tsx.
+// Mantido apenas para compatibilidade com ferramentas que esperam App.tsx.
+export {};

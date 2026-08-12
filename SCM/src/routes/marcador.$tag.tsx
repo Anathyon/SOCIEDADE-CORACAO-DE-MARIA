@@ -27,21 +27,29 @@ function TagPage() {
   const filtered = posts.filter((p) => p.tags.includes(tag));
 
   return (
-    <main className="mx-auto max-w-7xl px-6 py-12">
+    <main style={{ maxWidth: "80rem", margin: "0 auto", padding: "3rem 1.5rem" }}>
       <Reveal>
-        <header className="mb-16 border-b border-border pb-8">
+        <header className="border-b border-border" style={{ marginBottom: "4rem", paddingBottom: "2rem" }}>
           <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-olive">
             Marcador
           </span>
-          <h1 className="mt-2 font-serif text-4xl text-olive-deep md:text-5xl">{tag}</h1>
-          <p className="mt-3 text-sm text-muted-foreground">
+          <h1
+            className="font-serif text-4xl text-olive-deep md:text-5xl"
+            style={{ marginTop: "0.5rem" }}
+          >
+            {tag}
+          </h1>
+          <p className="text-sm text-muted-foreground" style={{ marginTop: "0.75rem" }}>
             {filtered.length} {filtered.length === 1 ? "publicação" : "publicações"}
           </p>
         </header>
       </Reveal>
 
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
-        <div className="space-y-16 md:col-span-8">
+      <div
+        style={{ display: "flex", gap: "3rem", alignItems: "flex-start" }}
+        className="flex-col md:flex-row"
+      >
+        <div style={{ flex: "2", display: "flex", flexDirection: "column", gap: "4rem" }}>
           {filtered.length === 0 ? (
             <p className="text-sm">
               Nenhuma publicação com este marcador.{" "}
@@ -57,7 +65,8 @@ function TagPage() {
             ))
           )}
         </div>
-        <div className="md:col-span-4">
+
+        <div style={{ flex: "1" }}>
           <BlogSidebar />
         </div>
       </div>
