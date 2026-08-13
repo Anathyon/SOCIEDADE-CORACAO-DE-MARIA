@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { describeError, consumeLastCapturedError } from "../lib/error-capture";
 
 describe("describeError", () => {
