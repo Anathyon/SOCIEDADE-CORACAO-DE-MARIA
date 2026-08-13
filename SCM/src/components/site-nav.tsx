@@ -33,13 +33,15 @@ export function SiteNav() {
           justifyContent: "space-between",
         }}
       >
-        <Link to="/" style={{ display: "flex", flexDirection: "column" }}>
-          <span className="font-serif text-2xl font-bold italic tracking-tight text-olive-deep">
-            Sítio Santo Elias
-          </span>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-olive-deep/60">
-            Sociedade Coração de Maria — SCM
-          </span>
+        <Link
+          to="/"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <img
+            src="/Sociedade Coração de Maria SCM 1.png"
+            alt="Logo Sociedade Coração de Maria"
+            style={{ height: "4.5rem", width: "auto" }}
+          />
         </Link>
 
         <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>

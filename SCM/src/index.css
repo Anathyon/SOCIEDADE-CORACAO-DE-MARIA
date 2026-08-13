@@ -67,8 +67,8 @@
   /* Paleta extraída do blog original: oliva claro, oliva profundo, creme */
   --cream: oklch(0.958 0.024 96.5);
   --olive: oklch(0.83 0.121 106.2);
-  --olive-deep: oklch(0.29 0.041 108.5);
-  --graphite: oklch(0.52 0.008 106);
+  --olive-deep: oklch(0.18 0.041 108.5);
+  --graphite: oklch(0.22 0.012 106);
   --background: var(--cream);
   --foreground: var(--olive-deep);
   --card: oklch(0.985 0.012 96.5);
@@ -85,8 +85,8 @@
   --accent-foreground: var(--olive-deep);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.29 0.041 108.5 / 12%);
-  --input: oklch(0.29 0.041 108.5 / 18%);
+  --border: oklch(0.18 0.041 108.5 / 15%);
+  --input: oklch(0.18 0.041 108.5 / 20%);
   --ring: var(--olive);
   --chart-1: oklch(0.646 0.222 41.116);
 
